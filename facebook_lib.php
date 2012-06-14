@@ -30,29 +30,6 @@ function getAccessToken($code){
 
 //以下、いろいろ取得用のfunction
 
-function getLikeDatas($access_token){
-  $ch = curl_init();
-  $fql="SELECT user_id, object_id, post_id,object_type FROM like WHERE user_id=me() AND object_type='profile' limit 10";
-  $url="https://graph.facebook.com/fql/?q=" . rawurlencode($fql) . "&access_token=" . $access_token . "&format=json";
-  curl_setopt($ch, CURLOPT_URL, $url);
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-  $resp = curl_exec($ch);
-  $resp = json_decode($resp);
-  var_dump($resp);
-  return $resp->data;
-}
-
-function getDetailLike($access_token,$object_id){
-  $ch = curl_init();
-  $fql="SELECT post_fbid, fromid, object_id, text, time FROM comment WHERE object_id =" . $object_id;
-  $url="https://graph.facebook.com/fql/?q=" . rawurlencode($fql) . "&access_token=" . $access_token . "&format=json";
-  curl_setopt($ch, CURLOPT_URL, $url);
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-  $resp = curl_exec($ch);
-  $resp = json_decode($resp);
-  var_dump($resp);
-  return $resp->data;
-}
 
 function getAllFriendId($access_token){
   $ch = curl_init();
